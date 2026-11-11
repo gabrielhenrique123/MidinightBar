@@ -1,4 +1,6 @@
 
+export const discordInvite = "https://discord.gg/zthegw3r3";
+
 export const community = {
   name: "Midnightbar",
 
