@@ -1,0 +1,2 @@
+import {identity,isAdmin,errorResponse} from '../../../../lib/guard';import {db} from '../../../../lib/db';
+export async function GET(){try{const id=await identity();if(!isAdmin(id))throw new Error('FORBIDDEN');const c=db();const {data:event,error}=await c.from('events').select('id,status').eq('slug','christmas-2026').single();if(error)throw error;const {count}=await c.from('participants').select('id',{count:'exact',head:true}).eq('event_id',event.id);return Response.json({status:event.status,count})}catch(e){return errorResponse(e)}}
